@@ -1,0 +1,6 @@
+---
+- name: Create spark user
+  sudo: True
+  user:
+    name: "{{spark_user}}"
+    comment: "spark user"

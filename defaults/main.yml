@@ -1,0 +1,15 @@
+---
+# Note: Spark versions starting with 2.0 are built with Scala 2.11 by
+# default
+spark_version: "1.6.2"
+# Other choices might look like without-hadoop, hadoop1, hadoop2.3,
+# hadoop2.4, hadoop2.6, hadoop2.7 -- look up valid combinations at
+# http://archive.apache.org/dist/spark/
+spark_hadoop_version: "hadoop1-scala2.11"
+spark_user: spark
+spark_tgz_filename: spark-{{spark_version}}-bin-{{spark_hadoop_version}}.tgz
+spark_tgz_url_base: http://d3kbcqa49mib13.cloudfront.net/
+spark_tgz_url: "{{spark_tgz_url_base}}{{spark_tgz_filename}}"
+spark_install_chdir: /opt
+spark_install_dir: "{{spark_install_chdir}}/spark"
+spark_tmp_unpack_dir: "/tmp/spark-{{spark_version}}-{{spark_hadoop_version}}"

@@ -1,0 +1,41 @@
+---
+- name: Check if spark is installed
+  stat: path={{spark_install_dir}}
+  register: install
+
+- name: Download spark
+  command: wget -O /tmp/{{spark_tgz_filename}} {{spark_tgz_url}}
+  args:
+    creates: /tmp/{{spark_tgz_filename}}
+  when: (install.stat.isdir is not defined or not install.stat.isdir)
+
+- name: Make unpack directory
+  sudo: True
+  file:
+    path: "{{spark_tmp_unpack_dir}}"
+    owner: "{{spark_user}}"
+    state: directory
+  when: (install.stat.isdir is not defined or not install.stat.isdir)
+
+- name: Unpack spark
+  command: tar xvfoz "/tmp/{{spark_tgz_filename}}" --strip-components 1
+  sudo: True
+  when: (install.stat.isdir is not defined or not install.stat.isdir)
+  args:
+    chdir: "{{spark_tmp_unpack_dir}}"
+
+- name: Move into place
+  command: mv {{spark_tmp_unpack_dir}} {{spark_install_dir}}
+  sudo: True
+  when: (install.stat.isdir is not defined or not install.stat.isdir)
+  args:
+    creates: "{{spark_install_dir}}"
+
+- name: Chown to spark
+  sudo: True
+  file:
+    path: "{{spark_install_dir}}"
+    owner: "{{spark_user}}"
+    recurse: yes
+    state: directory
+

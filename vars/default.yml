@@ -1,0 +1,4 @@
+---
+spark_monit_conf_dir: /etc/monit/conf.d
+package_names:
+- monit

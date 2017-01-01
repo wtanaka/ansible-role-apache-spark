@@ -13,3 +13,10 @@ spark_tgz_url: "{{spark_tgz_url_base}}{{spark_tgz_filename}}"
 spark_install_chdir: /opt
 spark_install_dir: "{{spark_install_chdir}}/spark"
 spark_tmp_unpack_dir: "/tmp/spark-{{spark_version}}-{{spark_hadoop_version}}"
+spark_log_dir: /var/log/spark
+# Configuration for spark-env.sh
+spark_env:
+  SPARK_LOG_DIR: "{{spark_log_dir}}"
+  SPARK_WORKER_CORES: 6
+# Site specific spark-env.sh settings
+spark_env_site: {}

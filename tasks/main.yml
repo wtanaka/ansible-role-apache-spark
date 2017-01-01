@@ -18,4 +18,19 @@
 
 - include: create_user.yml
 
+- name: Make log directory
+  sudo: True
+  file:
+    path: "{{spark_log_dir}}"
+    owner: "{{spark_user}}"
+    state: directory
+
 - include: untar_spark.yml
+
+- name: spark-env.sh
+  sudo: True
+  template: >
+    src=spark-env.sh.j2
+    dest={{spark_install_dir}}/conf/spark-env.sh
+    owner={{spark_user}}
+    mode=0755

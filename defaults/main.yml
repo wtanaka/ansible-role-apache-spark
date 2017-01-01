@@ -6,7 +6,7 @@ spark_version: "1.6.2"
 # hadoop2.4, hadoop2.6, hadoop2.7 -- look up valid combinations at
 # http://archive.apache.org/dist/spark/
 spark_hadoop_version: "hadoop1-scala2.11"
-spark_user: spark
+spark_user: "{% if is_integration_test is defined and is_integration_test %}kitchen{% else %}spark{% endif %}"
 spark_tgz_filename: spark-{{spark_version}}-bin-{{spark_hadoop_version}}.tgz
 spark_tgz_url_base: http://d3kbcqa49mib13.cloudfront.net/
 spark_tgz_url: "{{spark_tgz_url_base}}{{spark_tgz_filename}}"
@@ -14,9 +14,11 @@ spark_install_chdir: /opt
 spark_install_dir: "{{spark_install_chdir}}/spark"
 spark_tmp_unpack_dir: "/tmp/spark-{{spark_version}}-{{spark_hadoop_version}}"
 spark_log_dir: /var/log/spark
+spark_pid_dir: /var/run/spark
 # Configuration for spark-env.sh
 spark_env:
   SPARK_LOG_DIR: "{{spark_log_dir}}"
+  SPARK_PID_DIR: "{{spark_pid_dir}}"
   SPARK_WORKER_CORES: 6
 # Site specific spark-env.sh settings
 spark_env_site: {}

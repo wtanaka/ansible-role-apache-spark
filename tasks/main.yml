@@ -25,6 +25,13 @@
     owner: "{{spark_user}}"
     state: directory
 
+- name: Make pid directory
+  sudo: True
+  file:
+    path: "{{spark_pid_dir}}"
+    owner: "{{spark_user}}"
+    state: directory
+
 - include: untar_spark.yml
 
 - name: spark-env.sh

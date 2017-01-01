@@ -1,0 +1,5 @@
+check process spark with pidfile {{spark_pidfile}}
+  start program = "{{spark_start_script}}"
+    as uid {{spark_user}}
+  stop program = "{{spark_stop_script}}"
+    as uid {{spark_user}}

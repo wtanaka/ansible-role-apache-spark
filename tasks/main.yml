@@ -48,3 +48,19 @@
     src=slaves.j2
     dest={{spark_install_dir}}/conf/slaves
     owner={{spark_user}}
+
+- name: Install monit config for spark
+  sudo: True
+  template: >
+    src=spark.conf.j2
+    dest={{spark_monit_conf_dir}}/spark.conf
+    owner=root
+  notify: restart monit
+
+- name: Make sure monit is started
+  sudo: True
+  service: name=monit state=started
+  # Does not work in CentOS7 or Fedora in CircleCI
+  when: not (is_integration_test is defined and
+        is_integration_test and (ansible_os_family == "RedHat" or
+           ansible_distribution == "CentOS"))

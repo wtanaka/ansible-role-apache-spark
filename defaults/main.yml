@@ -20,3 +20,5 @@ spark_env:
   SPARK_WORKER_CORES: 6
 # Site specific spark-env.sh settings
 spark_env_site: {}
+# List of domain names for slaves
+spark_slaves: []

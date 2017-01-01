@@ -34,3 +34,10 @@
     dest={{spark_install_dir}}/conf/spark-env.sh
     owner={{spark_user}}
     mode=0755
+
+- name: slaves
+  sudo: True
+  template: >
+    src=slaves.j2
+    dest={{spark_install_dir}}/conf/slaves
+    owner={{spark_user}}

@@ -15,6 +15,11 @@ spark_master_port: 7077
 spark_slaves: []
 spark_user: "{% if is_integration_test is defined and is_integration_test %}kitchen{% else %}spark{% endif %}"
 spark_tgz_filename: spark-{{spark_version}}-bin-{{spark_hadoop_version}}.tgz
+# Set this directory to download and cache tarball onto local machine,
+# for when the network connection between local and host is faster
+# than between host and internet, and if role will be run for several
+# hosts.
+# spark_local_download_cache: .
 spark_tgz_url_base: http://d3kbcqa49mib13.cloudfront.net/
 spark_tgz_url: "{{spark_tgz_url_base}}{{spark_tgz_filename}}"
 spark_install_chdir: /opt

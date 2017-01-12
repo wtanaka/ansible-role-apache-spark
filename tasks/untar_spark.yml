@@ -3,6 +3,18 @@
   stat: path={{spark_install_dir}}
   register: install
 
+- name: Download spark on local
+  when: spark_local_download_cache is defined
+  local_action: command wget -O {{spark_local_download_cache}}/{{spark_tgz_filename}} {{spark_tgz_url}}
+  args:
+    creates: "{{spark_local_download_cache}}/{{spark_tgz_filename}}"
+
+- name: Copy from local to host
+  when: spark_local_download_cache is defined
+  copy:
+    src: "{{spark_local_download_cache}}/{{spark_tgz_filename}}"
+    dest: /tmp/{{spark_tgz_filename}}
+
 - name: Download spark
   command: wget -O /tmp/{{spark_tgz_filename}} {{spark_tgz_url}}
   args:

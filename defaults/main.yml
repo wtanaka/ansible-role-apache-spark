@@ -14,6 +14,7 @@ spark_master_port: 7077
 # List of domain names for slaves
 spark_slaves: []
 spark_user: "{% if is_integration_test is defined and is_integration_test %}kitchen{% else %}spark{% endif %}"
+spark_user_shell: "/bin/bash"
 spark_tgz_filename: spark-{{spark_version}}-bin-{{spark_hadoop_version}}.tgz
 # Set this directory to download and cache tarball onto local machine,
 # for when the network connection between local and host is faster

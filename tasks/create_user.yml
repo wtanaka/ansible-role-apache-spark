@@ -4,3 +4,5 @@
   user:
     name: "{{spark_user}}"
     comment: "spark user"
+    shell: "{{spark_user_shell}}"
+    password: "*"

@@ -60,7 +60,3 @@
 - name: Make sure monit is started
   sudo: True
   service: name=monit state=started
-  # Does not work in CentOS7 or Fedora in CircleCI
-  when: not (is_integration_test is defined and
-        is_integration_test and (ansible_os_family == "RedHat" or
-           ansible_distribution == "CentOS"))
